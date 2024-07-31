@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#06aa5e">
-    <meta name="msapplication-navbutton-color" content="#06aa5e">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Sign up | Basket ™</title>
-    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/css/styles.css">
-    <script src="./assets/js/script.js" defer></script>
-</head>
-<body>
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% extends "base.html" %}
+{% block content %}
+
+
+
     <main class="card-container slideUp-animation">
         <div class="image-container">
             <h1 class="company">Basket <sup>&trade;</sup></h1>
@@ -23,7 +15,10 @@
                 <img src="./assets/images/dbl-arrow.png" alt="">
             </a>
         </div>
-        <form action="" method="">
+
+
+
+        <form action="{{url_for('signup_page')}}" method="post">
             <div class="form-container slideRight-animation">
     
                 <h1 class="form-header">
@@ -34,16 +29,16 @@
                     <label for="f-name"></label>
                     <input type="text" name="f-name" id="f-name" required>
                     <span>
-                        First name
+                        Customer Name
                     </span>
                     <div class="error"></div>
                 </div>
     
                 <div class="input-container">
-                    <label for="l-name"></label>
-                    <input type="text" name="l-name" id="l-name" required>
+                    <label for="u-name"></label>
+                    <input type="text" name="u-name" id="u-name" required>
                     <span>
-                        Last name
+                       Username
                     </span>
                     <div class="error"></div>
                 </div>
@@ -84,23 +79,13 @@
 
                 <div id="btm">
                     <button type="submit" class="submit-btn">Create Account</button>
-                    <p class="btm-text">
-                        Already have an account..? <span class="btm-text-highlighted">  Log in</span>
+                    <p class="btm-text" >
+                        Already have an account..? <a href="{{url_for('login_page')}}"> <span class="btm-text-highlighted">  Log in</span></a>
                     </p>
                 </div>
             </div>
         </form>
+
     </main>
-    <section class="outro-overlay disabled slideUp-animation">
-        <h1 class="company">Basket <sup>&trade;</sup></h1>
-        <h1 class="outro-greeting">Thank's for signing up..!</h1>
-        <img src="./assets/images/shape.svg" alt="" class="shape">
-        <img src="./assets/images/signedUp.svg" alt="" id="signedUp-illustration" class="slideRight-animation">
-        <div class="author-link">
-            &copy;&nbsp;
-            <a href="https://www.0xabdulkhalid.ml/">0xabdulkhalid</a> |
-            <a href="https://www.github.com/0xabdulkhalid/basket-sign-up-form/">Source Code</a>
-        </div>
-    </section>
-</body>
-</html>
+
+ {% endblock %}

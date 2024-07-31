@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h5>You Have Successfull Logged In {%if user%}{{user[0][1]}}{%endif%}</h5>
+    {%if user%}
+    <a href="{{url_for('logout')}}"><button >Logout Here</button></a>
+    {% else %}
+    <a href="{{url_for('login_page')}}"><button >Login Here</button></a>
+    {% endif %}
+</body>
+</html>
