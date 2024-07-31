@@ -23,8 +23,13 @@ conn = mysql.connector.connect(host="127.0.0.1", user="root",password="admin",da
 cursor = conn.cursor()
 
 
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html'), 404
 
-
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('404.html'), 500
 # For Loggin Here 
 @app.route('/login',methods = ['GET','POST'])
 def login_page():
@@ -90,12 +95,7 @@ def signup_page():
 
 @app.route("/")
 def home_page():
-    # if(session["user_id"]):
-    #     cursor.execute("""SELECT * FROM `users` WHERE `user_id` LIKE '{}'""".format(session["user_id"]))
-    #     user= cursor.fetchall()
-    #     return render_template("temp.html",user=user)
-
-    return render_template("temp.html")
+    return render_template("index.html")
 
 # LOG OUT
 @app.route('/logout')

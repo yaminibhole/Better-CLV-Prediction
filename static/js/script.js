@@ -46,15 +46,15 @@ passwordConfirm.addEventListener('keyup', (e)=>{
     password.value === e.target.value ? onValidation(message, '', 1) : onValidation(message, '*Password did not match', 0)
 })
 
-submitBtn.addEventListener('click', (e)=>{
-    e.preventDefault()
-    if(count > 5){
-        cardContainer.style.display = 'none'
-        outroOverlay.classList.remove('disabled')
-    }
-    else{
-        for(let i=0; i<errorDisplayers.length; i++){
-            errorDisplayers[i].textContent = '*This field is Required'
-        }
-    }
-})
+// submitBtn.addEventListener('click', (e)=>{
+//     e.preventDefault()
+//     if(count > 5){
+//         cardContainer.style.display = 'none'
+//         outroOverlay.classList.remove('disabled')
+//     }
+//     else{
+//         for(let i=0; i<errorDisplayers.length; i++){
+//             errorDisplayers[i].textContent = '*This field is Required'
+//         }
+//     }
+// })

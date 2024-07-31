@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e2832;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .section {
+            padding: 100px 0; /* Add some padding to create space between sections */
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 20px;
+            z-index: 1000;
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .btn-outline {
+            padding-left: 30px;
+            padding-right: 30px;
+            border: 1px solid #00ff9d;
+            color: #00ff9d;
+        }
+        .btn-solid {
+            padding-left: 42px;
+            padding-right: 42px;
+            background-color: #00ff9d;
+            color: #1e2832;
+        }
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+        }
+        .text-content {
+            flex: 1;
+            min-width: 300px; /* Minimum width to ensure responsiveness */
+        }
+        h1 {
+            font-size: 3em;
+            color: #00ff9d;
+            margin-bottom: 0;
+        }
+        p {
+            font-size: 1.1em;
+            color: #cccccc;
+        }
+        .image-content {
+            flex: 1;
+            text-align: right;
+            min-width: 300px; /* Minimum width to ensure responsiveness */
+        }
+        .image-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .learn-more {
+            display: inline-block;
+            margin-left: 0;
+        }
+        .why-choose-us {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .why-choose-us h2 {
+            font-size: 2.5em;
+            color: #00ff9d;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .why-choose-us h2::after {
+            content: "";
+            width: 100px;
+            height: 4px;
+            background-color: #00ff9d;
+            display: block;
+            margin: 10px auto 0;
+        }
+        .features {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .feature {
+            flex: 1 1 calc(33% - 20px);
+            margin-bottom: 15px;
+            background-color: #1e2832;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .feature:hover {
+            transform: scale(1.05);
+            background-color: #00ff9d;
+            color: #1e2832;
+        }
+        .feature h3 {
+            color: #00ff9d;
+            margin-bottom: 10px;
+        }
+        .feature:hover h3 {
+            color: #1e2832;
+        }
+        .feature:hover p {
+            color: #1e2832;
+        }
+    </style>
+
+    <header>
+        <a href="/signup" class="btn btn-outline">Register</a>
+        <a href="/login" class="btn btn-solid">Login</a>
+    </header>
+
+    <section class="section" id="home">
+        <div class="container">
+            <div class="content">
+                <div class="text-content">
+                    <h1>CUSTOMER<br>LIFETIME VALUE<br>PREDICTION</h1>
+                    <p>Better Customer Lifetime Prediction harnesses advanced<br>machine learning to forecast customer longevity and spending.<br>By analyzing historical and behavioral data, we enhance retention<br>strategies and optimize personalized marketing efforts. This innovative approach maximizes customer value, driving sustainable growth<br>and improved satisfaction.</p>
+
+                    <a href="#why-choose-us" class="btn btn-outline learn-more">Learn More</a>
+                    
+                </div>
+                <div class="image-content">
+                    <img src="{{ url_for('static', filename='images/home1.png') }}" alt="Customer Lifetime Value Illustration">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="why-choose-us">
+        <div class="container">
+            <div class="why-choose-us">
+                <h2>Why Choose Us</h2>
+                <div class="features">
+                    <div class="feature">
+                        <h3>Advanced AI Models</h3>
+                        <p>Our state-of-the-art AI models provide highly accurate CLV predictions.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Real-time Analysis</h3>
+                        <p>Get instant insights with our real-time data processing capabilities.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Customizable Solutions</h3>
+                        <p>Tailor our platform to fit your specific business needs and goals.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Easy Integration</h3>
+                        <p>Seamlessly integrate with your existing CRM and data systems.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Actionable Insights</h3>
+                        <p>Receive clear, actionable recommendations to improve customer retention.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>24/7 Support</h3>
+                        <p>Our expert team is always available to assist you with any questions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

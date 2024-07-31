@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
     <main class="card-container slideUp-animation">
+
         <div class="image-container">
-            <h1 class="company">Basket <sup>&trade;</sup></h1>
-            <img src="./assets/images/signUp.svg" class="illustration" alt="">
-            <p class="quote">Sign up today to get exciting offers..!</p>
+            <h1 class="company">Customer Lifetime Value <sup>&trade;</sup></h1>
+            <img src="{{ url_for('static', filename='images/signUp.svg') }}" class="illustration" alt="">
+            <p class="quote">Designed by Team NextWave</p>
             <a href="#btm" class="mobile-btm-nav">
-                <img src="./assets/images/dbl-arrow.png" alt="">
+                <img src="{{ url_for('static', filename='images/dbl-arrow.png') }}" alt="">
             </a>
         </div>
         <form action="{{url_for('login_page')}}" method="post">
