@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+<header>
+    <a href="{{url_for('signup_page')}}" class="btn btn-outline">Register</a>
+    <a href="{{url_for('home_page')}}" class="btn btn-solid">Home</a>
+</header>
+
+
+
     <main class="card-container slideUp-animation">
 
         <div class="image-container">
-            <h1 class="company">Customer Lifetime Value <sup>&trade;</sup></h1>
+            <h1 style="color: #fff;"  class="company">Customer Lifetime Value <sup>&trade;</sup></h1>
             <img src="{{ url_for('static', filename='images/signUp.svg') }}" class="illustration" alt="">
             <p class="quote">Designed by Team NextWave</p>
             <a href="#btm" class="mobile-btm-nav">
@@ -43,5 +53,7 @@
             </div>
         </form>
     </main>
+
+{% include "footer.html" %}
    
 {% endblock %}

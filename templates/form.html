@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLV Data Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 1000px;
+            max-width: 100%;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .form-section {
+            flex: 2;
+            padding: 40px;
+            background-color: #d0f0c0;
+            overflow-y: auto;
+            max-height: 80vh;
+            scrollbar-width: thin;
+            scrollbar-color: #1e2832 #ffffff;
+        }
+        .form-section::-webkit-scrollbar {
+            width: 10px;
+        }
+        .form-section::-webkit-scrollbar-thumb {
+            background-color: #1e2832;
+            border-radius: 10px;
+        }
+        .form-section::-webkit-scrollbar-thumb:vertical {
+            border-radius: 20px;
+        }
+        .form-section::-webkit-scrollbar-track {
+            background-color: #ffffff;
+        }
+        .upload-section {
+            flex: 1;
+            background-color: #00ff9d;
+            color: #1e2832;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: sticky;
+            top: 0;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #1e2832;
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #1e2832;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="file"]:focus {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+        button {
+            background-color: #1e2832;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .upload-button {
+            background-color: #1e2832;
+            color: #ffffff;
+            border: 2px solid #1e2832;
+            margin-top: 20px;
+        }
+        .upload-button:hover {
+            transform: scale(1.05);
+        }
+        .or {
+           
+            border-bottom: 1px solid #1e2832;
+            margin: 20px 0;
+            
+            color: #1e2832;
+            font-size: 18px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-section">
+            <h2>Enter CLV Data</h2>
+            <form>
+                <input type="text" placeholder="Field 1" required>
+                <input type="text" placeholder="Field 2" required>
+                <input type="text" placeholder="Field 3" required>
+                <input type="text" placeholder="Field 4" required>
+                <input type="text" placeholder="Field 5" required>
+                <input type="text" placeholder="Field 6" required>
+                <input type="text" placeholder="Field 7" required>
+                <input type="text" placeholder="Field 8" required>
+                <input type="text" placeholder="Field 9" required>
+                <input type="text" placeholder="Field 10" required>
+                <input type="text" placeholder="Field 11" required>
+                <input type="text" placeholder="Field 12" required>
+                <button type="submit">Submit Data</button>
+            </form>
+        </div>
+        <div class="upload-section">
+            <div class="or">OR</div>
+            <h2>Upload Data</h2>
+            <p>Upload your CSV file to start your journey with us</p>
+            <input type="file" accept=".csv" id="clv-file">
+            
+            <button class="upload-button">Upload CSV File</button>
+        </div>
+    </div>
+</body>
+</html>

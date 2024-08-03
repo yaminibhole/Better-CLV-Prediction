@@ -3,90 +3,97 @@
 
 {% extends "base.html" %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 
 
 
-    <main class="card-container slideUp-animation">
+</style>
 
-        <div class="image-container">
-            <h1 class="company">Customer Lifetime Value <sup>&trade;</sup></h1>
-            <img src="{{ url_for('static', filename='images/signUp.svg') }}" class="illustration" alt="">
-            <p class="quote">Designed by Team NextWave</p>
-            <a href="#btm" class="mobile-btm-nav">
-                <img src="{{ url_for('static', filename='images/dbl-arrow.png') }}" alt="">
-            </a>
-        </div>
-
-
-
-        <form action="{{url_for('signup_page')}}" method="post">
-            <div class="form-container slideRight-animation">
     
-                <h1 class="form-header">
-                    Get started
-                </h1>
-    
-                <div class="input-container">
-                    <label for="f-name"></label>
-                    <input type="text" name="f-name" id="f-name" required>
-                    <span>
-                        Customer Name
-                    </span>
-                    <div class="error"></div>
-                </div>
-    
-                <div class="input-container">
-                    <label for="u-name"></label>
-                    <input type="text" name="u-name" id="u-name" required>
-                    <span>
-                       Username
-                    </span>
-                    <div class="error"></div>
-                </div>
-    
-                <div class="input-container">
-                    <label for="mail">
-                    </label>
-                    <input type="email" name="mail" id="mail" required>
-                    <span>
-                        E-mail
-                    </span>
-                    <div class="error"></div>
-                </div>
-    
-                <div class="input-container">
-                    <label for="phone">
-                    </label>
-                    <input type="tel" name="phone" id="phone" required>
-                    <span>Phone</span>
-                    <div class="error"></div>
-                </div>
-    
-                <div class="input-container">
-                    <label for="user-password"></label>
-                    <input type="password" name="user-password" id="user-password" class="user-password" required>
-                    <span>Password</span>
-                    <div class="error"></div>
-                </div>
+<header>
+    <a href="{{url_for('login_page')}}" class="btn btn-outline">Login</a>
+    <a href="{{url_for('home_page')}}" class="btn btn-solid">Home</a>
+</header>
 
-                <div class="input-container">
-                    <label for="user-password-confirm"></label>
-                    <input type="password" name="user-password-confirm" id="user-password-confirm" class="password-confirmation" required>
-                    <span>
-                        Confirm Password
-                    </span>
-                    <div class="error"></div>
-                </div>
+<main class="card-container slideUp-animation">
+    <div class="image-container">
+        <h1 style="color: #fff;" class="company">Customer Lifetime Value</h1>
+        <img src="{{ url_for('static', filename='images/signUp.svg') }}" class="illustration" alt="">
+        <p class="quote">Designed by Team NextWave</p>
+        <a href="#btm" class="mobile-btm-nav">
+            <img src="{{ url_for('static', filename='images/dbl-arrow.png') }}" alt="">
+        </a>
+    </div>
+    <form action="{{url_for('signup_page')}}" method="post">
+        <div class="form-container slideRight-animation">
 
-                <div id="btm">
-                    <button type="submit" class="submit-btn">Create Account</button>
-                    <p class="btm-text" >
-                        Already have an account..? <a href="{{url_for('login_page')}}"> <span class="btm-text-highlighted">  Log in</span></a>
-                    </p>
-                </div>
+            <h1 class="form-header">
+                Get started
+            </h1>
+
+            <div class="input-container">
+                <label for="f-name"></label>
+                <input type="text" name="f-name" id="f-name" required>
+                <span>
+                    Full Name
+                </span>
+                <div class="error"></div>
             </div>
-        </form>
 
-    </main>
+            <div class="input-container">
+                <label for="u-name"></label>
+                <input type="text" name="u-name" id="u-name" required>
+                <span>
+                    User Name
+                </span>
+                <div class="error"></div>
+            </div>
+
+            <div class="input-container">
+                <label for="mail">
+                </label>
+                <input type="email" name="mail" id="mail" required>
+                <span>
+                    E-mail
+                </span>
+                <div class="error"></div>
+            </div>
+
+            <div class="input-container">
+                <label for="phone">
+                </label>
+                <input type="tel" name="phone" id="phone" required>
+                <span>Phone</span>
+                <div class="error"></div>
+            </div>
+
+            <div class="input-container">
+                <label for="user-password"></label>
+                <input type="password" name="user-password" id="user-password" class="user-password" required>
+                <span>Password</span>
+                <div class="error"></div>
+            </div>
+
+            <div class="input-container">
+                <label for="user-password-confirm"></label>
+                <input type="password" name="user-password-confirm" id="user-password-confirm" class="password-confirmation" required>
+                <span>
+                    Confirm Password
+                </span>
+                <div class="error"></div>
+            </div>
+
+            <div id="btm">
+                <button type="submit" class="submit-btn">Create Account</button>
+                <p class="btm-text">
+                    Already have an account..? <a href="/login"><span class="btm-text-highlighted">  Log in</span></a>
+                </p>
+            </div>
+        </div>
+    </form>
+</main>
+
+{% include "footer.html" %}
+
 
  {% endblock %}

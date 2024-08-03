@@ -1,191 +1,153 @@
-{% extends "base.html" %}
-{% block content %}
-    <style>
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #1e2832;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-        .section {
-            padding: 100px 0; /* Add some padding to create space between sections */
-            width: 100vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            position: fixed;
-            top: 0;
-            right: 0;
-            padding: 20px;
-            z-index: 1000;
-        }
-        .btn {
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            margin-left: 10px;
-        }
-        .btn-outline {
-            padding-left: 30px;
-            padding-right: 30px;
-            border: 1px solid #00ff9d;
-            color: #00ff9d;
-        }
-        .btn-solid {
-            padding-left: 42px;
-            padding-right: 42px;
-            background-color: #00ff9d;
-            color: #1e2832;
-        }
-        .content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap; /* Allow content to wrap on smaller screens */
-        }
-        .text-content {
-            flex: 1;
-            min-width: 300px; /* Minimum width to ensure responsiveness */
-        }
-        h1 {
-            font-size: 3em;
-            color: #00ff9d;
-            margin-bottom: 0;
-        }
-        p {
-            font-size: 1.1em;
-            color: #cccccc;
-        }
-        .image-content {
-            flex: 1;
-            text-align: right;
-            min-width: 300px; /* Minimum width to ensure responsiveness */
-        }
-        .image-content img {
-            max-width: 100%;
-            height: auto;
-        }
-        .learn-more {
-            display: inline-block;
-            margin-left: 0;
-        }
-        .why-choose-us {
-            text-align: center;
-            padding: 60px 20px;
-        }
-        .why-choose-us h2 {
-            font-size: 2.5em;
-            color: #00ff9d;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        .why-choose-us h2::after {
-            content: "";
-            width: 100px;
-            height: 4px;
-            background-color: #00ff9d;
-            display: block;
-            margin: 10px auto 0;
-        }
-        .features {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .feature {
-            flex: 1 1 calc(33% - 20px);
-            margin-bottom: 15px;
-            background-color: #1e2832;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, background-color 0.3s;
-        }
-        .feature:hover {
-            transform: scale(1.05);
-            background-color: #00ff9d;
-            color: #1e2832;
-        }
-        .feature h3 {
-            color: #00ff9d;
-            margin-bottom: 10px;
-        }
-        .feature:hover h3 {
-            color: #1e2832;
-        }
-        .feature:hover p {
-            color: #1e2832;
-        }
-    </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 
-    <header>
-        <a href="/signup" class="btn btn-outline">Register</a>
-        <a href="/login" class="btn btn-solid">Login</a>
-    </header>
+<header>
+    <a href="{{url_for('signup_page')}}" class="btn btn-outline">Register</a>
+    <a href="{{url_for('login_page')}}" class="btn btn-solid">Login</a>
+</header>
 
-    <section class="section" id="home">
-        <div class="container">
-            <div class="content">
-                <div class="text-content">
-                    <h1>CUSTOMER<br>LIFETIME VALUE<br>PREDICTION</h1>
-                    <p>Better Customer Lifetime Prediction harnesses advanced<br>machine learning to forecast customer longevity and spending.<br>By analyzing historical and behavioral data, we enhance retention<br>strategies and optimize personalized marketing efforts. This innovative approach maximizes customer value, driving sustainable growth<br>and improved satisfaction.</p>
+<section class="section" id="home">
+    <div class="container">
+        <div class="content">
+            <div class="text-content animate-on-scroll">
+                <h1>CUSTOMER<br>LIFETIME VALUE<br>PREDICTION</h1>
+                <p>Better Customer Lifetime Prediction harnesses advanced<br>machine learning to forecast customer longevity and spending.<br>By analyzing historical and behavioral data, we enhance retention<br>strategies and optimize personalized marketing efforts. This innovative approach maximizes customer value, driving sustainable growth<br>and improved satisfaction.</p>
+                <a href="#why-choose-us" class="btn btn-outline learn-more">Learn More</a>
+            </div>
+            <div class="image-content animate-on-scroll">
+                <img src="{{url_for('static',filename='images/home1.png')}}" alt="Customer Lifetime Value Illustration">
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <a href="#why-choose-us" class="btn btn-outline learn-more">Learn More</a>
-                    
+<section class="section" id="why-choose-us">
+    <div class="container">
+        <div class="why-choose-us">
+            <h2 class="animate-on-scroll">Why Choose Us</h2>
+            <div class="features">
+                <div class="feature animate-on-scroll">
+                    <h3>Advanced AI Models</h3>
+                    <p>Our state-of-the-art AI models provide highly accurate CLV predictions.</p>
                 </div>
-                <div class="image-content">
-                    <img src="{{ url_for('static', filename='images/home1.png') }}" alt="Customer Lifetime Value Illustration">
+                <div class="feature animate-on-scroll">
+                    <h3>Real-time Analysis</h3>
+                    <p>Get instant insights with our real-time data processing capabilities.</p>
+                </div>
+                <div class="feature animate-on-scroll">
+                    <h3>Customizable Solutions</h3>
+                    <p>Tailor our platform to fit your specific business needs and goals.</p>
+                </div>
+                <div class="feature animate-on-scroll">
+                    <h3>Easy Integration</h3>
+                    <p>Seamlessly integrate with your existing CRM and data systems.</p>
+                </div>
+                <div class="feature animate-on-scroll">
+                    <h3>Actionable Insights</h3>
+                    <p>Receive clear, actionable recommendations to improve customer retention.</p>
+                </div>
+                <div class="feature animate-on-scroll">
+                    <h3>24/7 Support</h3>
+                    <p>Our expert team is always available to assist you with any questions.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section" id="why-choose-us">
-        <div class="container">
-            <div class="why-choose-us">
-                <h2>Why Choose Us</h2>
-                <div class="features">
-                    <div class="feature">
-                        <h3>Advanced AI Models</h3>
-                        <p>Our state-of-the-art AI models provide highly accurate CLV predictions.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Real-time Analysis</h3>
-                        <p>Get instant insights with our real-time data processing capabilities.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Customizable Solutions</h3>
-                        <p>Tailor our platform to fit your specific business needs and goals.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Easy Integration</h3>
-                        <p>Seamlessly integrate with your existing CRM and data systems.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Actionable Insights</h3>
-                        <p>Receive clear, actionable recommendations to improve customer retention.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>24/7 Support</h3>
-                        <p>Our expert team is always available to assist you with any questions.</p>
-                    </div>
+<section class="section features-benefits" id="features-benefits">
+    <div class="container">
+        <div class="features-benefits">
+            <h2 class="animate-on-scroll">Features & Benefits</h2>
+            <div class="features">
+                <div class="feature animate-on-scroll">
+                    <h3>Comprehensive Reporting</h3>
+                    <p>Generate detailed reports to monitor performance and trends.</p>
+                </div>
+                <div class="feature animate-on-scroll">
+                    <h3>Predictive Analytics</h3>
+                    <p>Leverage predictive models to forecast future customer behavior.</p>
+                </div>
+                <div class="feature animate-on-scroll">
+                    <h3>Enhanced Targeting</h3>
+                    <p>Refine your marketing campaigns based on precise customer insights.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-{% endblock %}
+<section class="section about-us" id="about-us">
+    <div class="container">
+        <div class="about-us">
+            <h2 class="animate-on-scroll">Team NextWave</h2>
+            <div class="team">
+                <div class="team-member animate-on-scroll">
+                    <a href="https://www.linkedin.com/in/gaurav-bhadane" target="_blank">
+                        <h3>Gaurav Bhadane</h3>
+                    </a>
+                </div>
+                <div class="team-member animate-on-scroll">
+                    <a href="https://www.linkedin.com/in/anushka-bhole/" target="_blank">
+                        <h3>Anushka Bhole</h3>
+                    </a>
+                </div>
+                <div class="team-member animate-on-scroll">
+                    <a href="https://www.linkedin.com/in/himanshu-bhole/" target="_blank">
+                        <h3>Himanshu Bhole</h3>
+                    </a>
+                </div>
+                <div class="team-member animate-on-scroll">
+                    <a href="https://www.linkedin.com/in/pruthvesh-baitule-1b9588229/" target="_blank">
+                        <h3>Pruthvesh Baithule</h3>
+                    </a>
+                </div>
+                <div class="team-member animate-on-scroll">
+                    <a href="https://www.linkedin.com/in/mahajantushar" target="_blank">
+                        <h3>Tushar Mahajan</h3>
+                    </a>
+                </div>
+                <div class="team-member animate-on-scroll">
+                    <a href="https://www.linkedin.com/in/yamini-bhole" target="_blank">
+                        <h3>Yamini Bhole</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section contact" id="contact">
+    <div class="contact-form animate-on-scroll">
+        <h1>Contact Us</h1>
+        <p style="font-size: 1em;">
+            Unlock Unprecedented Customer Retention and Growth Connect with Our Specialists Today!
+        </p>
+        <form action="#" method="POST">
+            <input type="email" name="email" placeholder="Your Email Address" required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" placeholder="How can we help?" required></textarea>
+            <button type="submit">SEND</button>
+        </form>
+    </div>
+</section>
+
+{% include "footer.html" %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+            observer.observe(element);
+        });
+    });
+</script>

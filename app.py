@@ -25,7 +25,7 @@ cursor = conn.cursor()
 
 @app.errorhandler(404)
 def not_found(error):
-    return render_template('404.html'), 404
+    return render_template('error.html'), 404
 
 @app.errorhandler(500)
 def internal_error(error):
@@ -49,8 +49,7 @@ def login_page():
                 session["user_id"] = user[0][0]
                 # Here Is How I Will Get Session Id
                 session.permanent=True
-                print(session["user_id"])
-                return render_template("temp.html",user = user)
+                return redirect('/teasting')
             else:
                 return jsonify({"error":"SomeThing Is Missing here"})
         else:
@@ -86,12 +85,21 @@ def signup_page():
         print(myuser)
         session['user_id'] = myuser[0][0]
         session.permanent=True
-        return render_template('temp.html',user = myuser)
+        return redirect('/teasting')
  
 
         
     return render_template('signup.html')
 
+@app.route("/teasting")
+def teasting():
+    print("hello World")
+    print(session)
+    if 'user_id' in session:
+        cursor.execute("""SELECT * FROM `users` WHERE `user_id` LIKE '{}'""".format(session['user_id']))
+        myuser = cursor.fetchall()
+        return render_template("form.html")
+    return render_template("temp.html")
 
 @app.route("/")
 def home_page():
@@ -100,7 +108,8 @@ def home_page():
 # LOG OUT
 @app.route('/logout')
 def logout():
-    session.pop('user_id')
+    if 'user_id' in session:
+        session.pop('user_id')
     return redirect('/')
 
 if __name__ == '__main__':

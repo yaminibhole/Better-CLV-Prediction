@@ -8,12 +8,27 @@
     <meta name="msapplication-navbutton-color" content="#06aa5e">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Sign up | Basket ™</title>
-    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
+    <title>Customer Life-Time Value Prediction</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
     <script src="{{ url_for('static', filename='js/script.js')}}"></script>
 
+
+    <style>
+
+        footer {
+            background-color: #2c3942;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        footer p {
+            margin: 0;
+        }
+        
+        </style>
+        
 
 </head>
 <body>
@@ -22,14 +37,5 @@
     {% block content %} 
     {% endblock %} 
 
-    <section class="outro-overlay disabled slideUp-animation">
-        <h1 class="company">Basket <sup>&trade;</sup></h1>
-        <h1 class="outro-greeting">Thank's for loging up..!</h1>
-        <img src="./assets/images/shape.svg" alt="" class="shape">
-        <img src="./assets/images/signedUp.svg" alt="" id="signedUp-illustration" class="slideRight-animation">
-        <div class="author-link">
-            <p>@NPN Cognizant</p>
-        </div>
-    </section>
 </body>
 </html>

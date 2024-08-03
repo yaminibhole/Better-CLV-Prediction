@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0e1418;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+            animation: slideUp 1s ease-out;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease-out;
+        }
+        p {
+            font-size: 1em;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.5s;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background-color: #4ade80;
+            color: #1e293b;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out 1s;
+        }
+        .btn:hover {
+            background-color: #00e68a;
+        }
+        .error-image {
+            width: 100%;
+            max-width: 400px;
+            z-index: 1001;
+            height: auto;
+            margin-bottom: 30px;
+        }
+        .error-404 {
+            font-size: 8em;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 5px #00ff9d, 0 0 10px #00ff9d, 0 0 15px #00ff9d;
+            margin: 0;
+            line-height: 1;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 1.5s;
+        }
+        .curve {
+            position: absolute;
+            bottom: -25px; /* Adjusted to cover more of the 404 */
+            left: 0;
+            width: 100vw;
+            height: 150px; /* Increased height to cover 25% of the "404" */
+            background-color: #1a202c;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: curveAnimation 1s ease-out;
+        }
+        
+        .curve p {
+            font-size: medium;
+            font-weight: 4 rem;
+
+        }
+        @media  screen and (max-width: 600px) {
+            .curve{
+                position: absolute;
+            bottom: -25px; /* Adjusted to cover more of the 404 */
+            left: 0;
+            width: 100vw;
+            height: 100px; /* Increased height to cover 25% of the "404" */
+            background-color: #1a202c;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: curveAnimation 1s ease-out;
+            padding: 2rem;
+            }
+
+            .curve p {
+            font-size: small;
+            font-weight: 2rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes curveAnimation {
+            from {
+                transform: scaleY(0);
+                opacity: 0;
+            }
+            to {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <div class="container">
+        <h1>PAGE NOT FOUND</h1>
+        <p>We couldn't find the page you're looking for.</p>
+        <button onclick="window.history.back()" class="btn">← Go Back Home</button>
+    </div>
+    <div class="error-404">404</div>
+    <div class="curve"> 
+
+        <p>© 2024 Customer Lifetime Value Prediction. All rights reserved.</p>
+    </div>
+
+
+   
+    {% endblock %}
