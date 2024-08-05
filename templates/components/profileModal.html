@@ -1,0 +1,128 @@
+<style>
+    /* NEW PROFILE Style */
+    .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            outline: none;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile:hover {
+            background-color: #e0e0e0;
+        }
+
+        .profile-image {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: #d0f0c0;
+            margin-right: 16px;
+        }
+
+        .profile-info h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .profile-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .profile-details {
+            background-color: #ffffff;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-details img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #d0f0c0;
+            display: block;
+            margin: 0 auto 16px;
+            object-fit: cover;
+        }
+
+        .profile-details button {
+            display: block;
+            margin: 0 auto 24px;
+            font-size: 14px;
+            color: #1e2832;
+            background-color: #d0f0c0;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-details button:hover {
+            background-color: #b0e0a2;
+        }
+
+        .profile-details .info {
+            margin-bottom: 16px;
+        }
+
+        .profile-details .info label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .profile-details .info input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .profile-details .info input:focus {
+            border-color: #1e2832;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(30, 40, 50, 0.2);
+        }
+</style>
+
+{%if user%}{{user[0][1]}}
+<h1>My Profile</h1>
+<div class="profile-details">
+    <img src="" alt="" id="profileImage">
+    <button id="editImageBtn">Edit Image</button>
+   
+    
+    <div class="info">
+        <label for="name">Name:</label>
+        <input type="text" id="name" value="{{user[0][1]}}">
+    </div>
+    <div class="info">
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" value="{{user[0][3]}}">
+    </div>
+    <div class="info">
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" value="+91 {{user[0][5]}}">
+    </div>
+</div>
+
+{%endif%}

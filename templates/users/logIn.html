@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "./base.html" %}
 {% block content %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
@@ -54,6 +54,6 @@
         </form>
     </main>
 
-{% include "footer.html" %}
+    {% include "Includes/footer.html" %}
    
 {% endblock %}

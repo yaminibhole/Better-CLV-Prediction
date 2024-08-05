@@ -1,0 +1,255 @@
+<style>
+    
+.clvform {
+        margin-bottom: 50px;
+        padding: 24px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+
+.form-section {
+        flex: 2;
+        padding: 40px;
+        background-color: #d0f0c0;
+        overflow-y: auto;
+        max-height: 80vh;
+        scrollbar-width: thin;
+        scrollbar-color: #1e2832 #ffffff;
+}
+
+.clvform {
+        display: flex;
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 550px;
+        width: 1000px;
+        max-width: 100%;
+        animation: fadeIn 2s ease-in-out;
+}
+
+.form-section::-webkit-scrollbar {
+    width: 10px;
+}
+.form-section::-webkit-scrollbar-thumb {
+    background-color: #1e2832;
+    border-radius: 10px;
+}
+.form-section::-webkit-scrollbar-thumb:vertical {
+    border-radius: 20px;
+}
+.form-section::-webkit-scrollbar-track {
+    background-color: #ffffff;
+}
+.upload-section {
+    flex: 1;
+    background-color: #00ff9d;
+    color: #1e2832;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+.upload-button {
+    background-color: #1e2832;
+    color: #ffffff;
+    border: 2px solid #1e2832;
+    margin-top: 20px;
+}
+.upload-button:hover {
+    transform: scale(1.05);
+}
+.or {
+    
+    border-bottom: 1px solid #1e2832;
+    margin: 20px 0;
+    
+    color: #1e2832;
+    font-size: 18px;
+}
+
+.modal-btn{
+    width: 200px!important;
+}
+
+
+.custom-modal-width {
+    max-width: 90%; /* Adjust this value as needed */
+    width: 800px; /* Adjust this value as needed */
+}
+
+@media (max-width: 800px) {
+    
+.custom-modal-width {
+        width: 100%; /* Ensure it is responsive on smaller screens */
+}
+}
+
+@media (max-width: 400px) {
+.clvform {
+flex-direction: column;
+}
+
+.form-section,
+.upload-section {
+    width: 100%;
+    height: 50%;
+    flex: none; /* Ensure sections don't stretch */
+}
+
+.form-section {
+    padding: 20px; /* Adjust padding for better appearance */
+}
+
+.upload-section {
+    flex: 2;
+    padding: 20px;
+    padding-top: 6rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #1e2832 #ffffff;
+}
+
+.upload-section::-webkit-scrollbar {
+        width: 10px;
+}
+    .upload-section::-webkit-scrollbar-thumb {
+        background-color: #1e2832;
+        border-radius: 10px;
+}
+    .upload-section::-webkit-scrollbar-thumb:vertical {
+        border-radius: 20px;
+    }
+    .upload-section::-webkit-scrollbar-track {
+        background-color: #ffffff;
+}
+
+}
+
+
+@media (max-width: 350px){
+    .upload-section p{
+       font-size: 0.9rem;
+       font-weight: 0.9rem;
+    }
+    .upload-section h2, .form-section .or{
+       font-size: 0.9rem;
+       font-weight: 0.9rem;
+    }
+
+    .upload-section{
+        padding: 0.2rem;
+    }
+    
+
+}
+
+
+</style>
+<h1>Home</h1>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scrollableModal">
+    Add Data
+</button>
+
+<!-- Modal -->
+
+         <div class="modal fade" id="scrollableModal" tabindex="-1" aria-labelledby="scrollableModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable custom-modal-width">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="scrollableModalLabel">Scrollable Modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <div class="clvform">
+                                
+                                <div class="upload-section">
+                                   
+                                    <h2>Upload Data</h2>
+                                    <p>Upload your CSV file to start your journey with us</p>
+                                    <input type="file" accept=".csv" id="clv-file">
+                                    <button class="upload-button">Upload CSV File</button>
+                                </div>
+
+                                <!-- THis is What -->
+
+                                <div class="form-section">
+                                    <div class="or">OR</div>
+                                    <h2>Enter CLV Data</h2>
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="paidLateFees" class="form-label">Paid Late Fees</label>
+                                            <input type="text" id="paidLateFees" placeholder="Enter Paid Late Fees" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="debtToIncome" class="form-label">Debt to Income</label>
+                                            <input type="text" id="debtToIncome" placeholder="Enter Debt to Income" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="creditUtilizationRatio" class="form-label">Credit Utilization Ratio</label>
+                                            <input type="text" id="creditUtilizationRatio" placeholder="Enter Credit Utilization Ratio" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="annualIncome" class="form-label">Annual Income</label>
+                                            <input type="text" id="annualIncome" placeholder="Enter Annual Income" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="averageAgeOfCredit" class="form-label">Average Age of Credit</label>
+                                            <input type="text" id="averageAgeOfCredit" placeholder="Enter Average Age of Credit" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="loanToIncomeRatio" class="form-label">Loan to Income Ratio</label>
+                                            <input type="text" id="loanToIncomeRatio" placeholder="Enter Loan to Income Ratio" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="employmentStability" class="form-label">Employment Stability</label>
+                                            <input type="text" id="employmentStability" placeholder="Enter Employment Stability" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="creditInquiriesTrend" class="form-label">Credit Inquiries Trend</label>
+                                            <input type="text" id="creditInquiriesTrend" placeholder="Enter Credit Inquiries Trend" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="monthlyPaymentBurden" class="form-label">Monthly Payment Burden</label>
+                                            <input type="text" id="monthlyPaymentBurden" placeholder="Enter Monthly Payment Burden" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="paidPrincipal" class="form-label">Paid Principal</label>
+                                            <input type="text" id="paidPrincipal" placeholder="Enter Paid Principal" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="paidInterest" class="form-label">Paid Interest</label>
+                                            <input type="text" id="paidInterest" placeholder="Enter Paid Interest" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="totalCreditLimit" class="form-label">Total Credit Limit</label>
+                                            <input type="text" id="totalCreditLimit" placeholder="Enter Total Credit Limit" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="totalCreditUtilized" class="form-label">Total Credit Utilized</label>
+                                            <input type="text" id="totalCreditUtilized" placeholder="Enter Total Credit Utilized" class="form-control" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit Data</button>
+                                    </form>
+                                </div>
+
+                            </div> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
