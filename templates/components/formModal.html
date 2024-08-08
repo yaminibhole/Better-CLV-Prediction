@@ -15,6 +15,7 @@
         background-color: #d0f0c0;
         overflow-y: auto;
         max-height: 80vh;
+
         scrollbar-width: thin;
         scrollbar-color: #1e2832 #ffffff;
 }
@@ -49,6 +50,7 @@
     color: #1e2832;
     padding: 40px;
     display: flex;
+    max-height: 80vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -159,97 +161,130 @@ flex-direction: column;
 </button>
 
 <!-- Modal -->
-
-         <div class="modal fade" id="scrollableModal" tabindex="-1" aria-labelledby="scrollableModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable custom-modal-width">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="scrollableModalLabel">Scrollable Modal</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade" id="scrollableModal" tabindex="-1" aria-labelledby="scrollableModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable custom-modal-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollableModalLabel">Scrollable Modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="manualForm" action="/teasting-dash" method="POST" enctype="multipart/form-data">
+                    <div class="clvform">
+                        <div class="upload-section">
+                            <h2>Upload Data</h2>
+                            <p>Upload your CSV file to start your journey with us</p>
+                            <input type="file" accept=".csv" id="file" name="file">
+                            <label for="particular_id" class="form-label">Enter Customer         ID:</label>
+                            <input type="text" id="particular_id" placeholder="Enter the customer ID" name="particular_id" class="form-control">
                         </div>
-                        <div class="modal-body">
-                            
-                            <div class="clvform">
-                                
-                                <div class="upload-section">
-                                   
-                                    <h2>Upload Data</h2>
-                                    <p>Upload your CSV file to start your journey with us</p>
-                                    <input type="file" accept=".csv" id="clv-file">
-                                    <button class="upload-button">Upload CSV File</button>
-                                </div>
 
-                                <!-- THis is What -->
+                        <div class="form-section">
+                            <div class="or">OR</div>
+                            <h2>Enter Data</h2>
 
-                                <div class="form-section">
-                                    <div class="or">OR</div>
-                                    <h2>Enter CLV Data</h2>
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="paidLateFees" class="form-label">Paid Late Fees</label>
-                                            <input type="text" id="paidLateFees" placeholder="Enter Paid Late Fees" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="debtToIncome" class="form-label">Debt to Income</label>
-                                            <input type="text" id="debtToIncome" placeholder="Enter Debt to Income" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="creditUtilizationRatio" class="form-label">Credit Utilization Ratio</label>
-                                            <input type="text" id="creditUtilizationRatio" placeholder="Enter Credit Utilization Ratio" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="annualIncome" class="form-label">Annual Income</label>
-                                            <input type="text" id="annualIncome" placeholder="Enter Annual Income" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="averageAgeOfCredit" class="form-label">Average Age of Credit</label>
-                                            <input type="text" id="averageAgeOfCredit" placeholder="Enter Average Age of Credit" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="loanToIncomeRatio" class="form-label">Loan to Income Ratio</label>
-                                            <input type="text" id="loanToIncomeRatio" placeholder="Enter Loan to Income Ratio" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="employmentStability" class="form-label">Employment Stability</label>
-                                            <input type="text" id="employmentStability" placeholder="Enter Employment Stability" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="creditInquiriesTrend" class="form-label">Credit Inquiries Trend</label>
-                                            <input type="text" id="creditInquiriesTrend" placeholder="Enter Credit Inquiries Trend" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="monthlyPaymentBurden" class="form-label">Monthly Payment Burden</label>
-                                            <input type="text" id="monthlyPaymentBurden" placeholder="Enter Monthly Payment Burden" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="paidPrincipal" class="form-label">Paid Principal</label>
-                                            <input type="text" id="paidPrincipal" placeholder="Enter Paid Principal" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="paidInterest" class="form-label">Paid Interest</label>
-                                            <input type="text" id="paidInterest" placeholder="Enter Paid Interest" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="totalCreditLimit" class="form-label">Total Credit Limit</label>
-                                            <input type="text" id="totalCreditLimit" placeholder="Enter Total Credit Limit" class="form-control" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="totalCreditUtilized" class="form-label">Total Credit Utilized</label>
-                                            <input type="text" id="totalCreditUtilized" placeholder="Enter Total Credit Utilized" class="form-control" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit Data</button>
-                                    </form>
-                                </div>
+                            <!-- Hidden field to indicate if manual input is used -->
+                            <input type="hidden" id="use_manual_input" name="use_manual_input" value="false">
 
-                            </div> 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Submit</button>
+                            <div class="mb-3">
+                                <label for="paidLateFees" class="form-label">Paid Late Fees</label>
+                                <input type="text" id="paidLateFees" step="0.01" name="paid_late_fees" placeholder="Enter Paid Late Fees" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="debtToIncome" class="form-label">Debt to Income</label>
+                                <input type="text" id="debtToIncome" step="0.01" name="debt_to_income" placeholder="Enter Debt to Income" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="creditUtilizationRatio" class="form-label">Credit Utilization Ratio</label>
+                                <input type="text" id="creditUtilizationRatio" step="0.01" name="credit_utilization_ratio" placeholder="Enter Credit Utilization Ratio" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="annualIncome" class="form-label">Annual Income</label>
+                                <input type="text" id="annualIncome" step="0.01" name="annual_income" placeholder="Enter Annual Income" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="averageAgeOfCredit" class="form-label">Average Age of Credit</label>
+                                <input type="text" id="averageAgeOfCredit" step="0.01" name="average_age_of_credit" placeholder="Enter Average Age of Credit" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loanToIncomeRatio" class="form-label">Loan to Income Ratio</label>
+                                <input type="text" id="loanToIncomeRatio" step="0.01" name="loan_to_income_ratio" placeholder="Enter Loan to Income Ratio" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="employmentStability" class="form-label">Employment Stability</label>
+                                <input type="text" id="employmentStability" step="0.01" name="employment_stability" placeholder="Enter Employment Stability" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="creditInquiriesTrend" class="form-label">Credit Inquiries Trend</label>
+                                <input type="text" id="creditInquiriesTrend" step="0.01" name="credit_inquiries_trend" placeholder="Enter Credit Inquiries Trend" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="monthlyPaymentBurden" class="form-label">Monthly Payment Burden</label>
+                                <input type="text" id="monthlyPaymentBurden" step="0.01" name="monthly_payment_burden" placeholder="Enter Monthly Payment Burden" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="paidPrincipal" class="form-label">Paid Principal</label>
+                                <input type="text" id="paidPrincipal" step="0.01" name="paid_principal" placeholder="Enter Paid Principal" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="paidInterest" class="form-label">Paid Interest</label>
+                                <input type="text" id="paidInterest" step="0.01" name="paid_interest" placeholder="Enter Paid Interest" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="totalCreditLimit" class="form-label">Total Credit Limit</label>
+                                <input type="text" id="totalCreditLimit" step="0.01" name="total_credit_limit" placeholder="Enter Total Credit Limit" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="totalCreditUtilized" class="form-label">Total Credit Utilized</label>
+                                <input type="text" id="totalCreditUtilized" step="0.01" name="total_credit_utilized" placeholder="Enter Total Credit Utilized" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="balance" class="form-label">Balance</label>
+                                <input type="text" id="balance" step="0.01" name="balance" placeholder="Enter Balance" class="form-control">
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="footerSubmitButton">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    document.getElementById('footerSubmitButton').addEventListener('click', function() {
+    // Create a new 'submit' event
+    const event = new Event('submit', { cancelable: true });
 
+    // Dispatch the event on the form
+    const form = document.getElementById('manualForm');
+    if (form.dispatchEvent(event)) {
+        // Only submit the form if the event wasn't canceled
+        form.submit();
+    }
+});
 
+document.getElementById('manualForm').addEventListener('submit', function(event) {
+    let useManualInput = true;
+
+    // Get all input fields within the form
+    const manualInputs = document.querySelectorAll('#manualForm input[type="text"]');
+
+    // Check if all required manual fields are filled
+    let l = 2;
+    console.log("Chin Tapak Dam Dam");
+    manualInputs.forEach(function(input) {
+        if (input.value.trim() === '' && l <= 0) {
+            useManualInput = false;
+        }
+        l -= 1;
+    });
+
+    // Update the hidden input field based on the check
+    document.getElementById('use_manual_input').value = useManualInput ? 'true' : 'false';
+});
+
+</script>

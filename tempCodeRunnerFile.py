@@ -1,1 +1,1 @@
-os
+debug

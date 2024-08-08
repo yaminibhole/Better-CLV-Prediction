@@ -1,21 +1,94 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
-     .dashboard{
-            background-color: #ffffff;
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            margin: 0 auto;
-        }
+
+   
+
+    body{
+        background-color: #F0F0F0;
+    }
 </style>
 
 
-<h1>Dashboard</h1>
-<div class="dashboard">
+
+
+<div class="container whole_container">
+    {%if 'ID' in customer_profile %}
+    <h1 class="text-dark ">Customer Profile ID: {{ customer_profile['ID'] }}</h1>
+    <h3>Prediction: {{ prediction }}</h3>
+    {% else %}
     
+    <h1>Prediction: {{ prediction }}</h1>
+
+    {%endif%}
     
 
+    <h2>Customer Profile</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Key</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in customer_profile.items() %}
+                    {% if key != 'ID' %}
+                        <tr>
+                            <td>{{ key }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <br><br>
+    <div style="border: 1px solid black;">
+    <img src="{{ url_for('static', filename='average_purchase_history.png') }}" alt="Customer Lifetime Value Illustration" class="img-fluid">
+    <br>
+    <img src="{{ url_for('static', filename='average_purchase_value.png') }}" alt="Customer Lifetime Value Illustration" class="img-fluid">
+    
+    </div>
+    <br><br>
 
 
+    <h2>Recommendations</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Recommendation</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recommendation in recommendation %}
+                    {% if ':' in recommendation %}
+                        <tr>
+                            <td>{{ recommendation.split(":")[0] }}</td>
+                            <td>{{ recommendation.split(":")[1] }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="2">{{ recommendation }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
+
+    <div class="report_gen">
+            <form action="/generate_report" method="get">
+                <button type="submit" class="btn btn-primary">Generate Report</button>
+            </form>
+    </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

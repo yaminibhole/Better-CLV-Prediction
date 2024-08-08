@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .data {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .data th, .data td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .data th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        .recommendation-section {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .recommendation-section h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .recommendation-list {
+            list-style-type: disc;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+        .recommendation-list li {
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .data-table {
+            margin-top: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .checkbox-label {
+            display: inline-block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter Credit Information</h2>
+    <form action="/teasting-dash" method="post" enctype="multipart/form-data">
+        <label for="file">Upload CSV File:</label>
+        <input type="file" id="file" name="file"><br><br>
+        
+        <label for="particular_id">Enter ID:</label>
+        <input type="text" id="particular_id" name="particular_id"><br><br>
+        
+        <h3>Or manually enter the data:</h3>
+        <label for="paid_late_fees">Paid Late Fees:</label>
+        <input type="number" step="0.01" name="paid_late_fees"><br>
+
+        <label for="debt_to_income">Debt to Income:</label>
+        <input type="number" step="0.01" name="debt_to_income"><br>
+
+        <label for="credit_utilization_ratio">Credit Utilization Ratio:</label>
+        <input type="number" step="0.01" name="credit_utilization_ratio"><br>
+
+        <label for="annual_income">Annual Income:</label>
+        <input type="number" step="0.01" name="annual_income"><br>
+
+        <label for="average_age_of_credit">Average Age of Credit:</label>
+        <input type="number" step="0.01" name="average_age_of_credit"><br>
+
+        <label for="loan_to_income_ratio">Loan to Income Ratio:</label>
+        <input type="number" step="0.01" name="loan_to_income_ratio"><br>
+
+        <label for="employment_stability">Employment Stability:</label>
+        <input type="number" step="0.01" name="employment_stability"><br>
+
+        <label for="credit_inquiries_trend">Credit Inquiries Trend:</label>
+        <input type="number" step="0.01" name="credit_inquiries_trend"><br>
+
+        <label for="monthly_payment_burden">Monthly Payment Burden:</label>
+        <input type="number" step="0.01" name="monthly_payment_burden"><br>
+
+        <label for="paid_principal">Paid Principal:</label>
+        <input type="number" step="0.01" name="paid_principal"><br>
+
+        <label for="paid_interest">Paid Interest:</label>
+        <input type="number" step="0.01" name="paid_interest"><br>
+
+        <label for="total_credit_limit">Total Credit Limit:</label>
+        <input type="number" step="0.01" name="total_credit_limit"><br>
+
+        <label for="total_credit_utilized">Total Credit Utilized:</label>
+        <input type="number" step="0.01" name="total_credit_utilized"><br>
+
+        <label for="balance">Balance:</label>
+        <input type="number" step="0.01" name="balance"><br><br>
+
+        <label for="use_manual_input">Use manual input:</label>
+        <input type="checkbox" id="use_manual_input" name="use_manual_input"><br><br>
+
+        <input type="submit" value="Predict">
+        <input type="submit" name="generate_report" value="Generate Report">
+    </form>
+
+    {% if prediction is not none %}
+        <h3>Prediction: {{ prediction }}</h3>
+        <h3>Calculated CLV: {{ CLV }}</h3>
+    {% endif %}
+
+    {% if error %}
+        <p style="color:red;">Error: {{ error }}</p>
+    {% endif %}
+    
+    {% if id %}
+        <h2>Data for ID {{ id }}:</h2>
+    {% endif %}
+    
+    {% for table in tables %}
+        {{ table | safe }}
+    {% endfor %}
+    
+    {% if manual_data_html %}
+        <h2>Manual Input Data:</h2>
+        {{ manual_data_html | safe }}
+    {% endif %}
+    
+    {% if plot_url1 and plot_url2 %}
+        <h3>Visualizations for Uploaded Data</h3>
+        <img src="{{ plot_url1 }}" alt="Average Purchase History">
+        <img src="{{ plot_url2 }}" alt="Average Purchase Value">
+    {% endif %}
+    
+    {% if manual_plot_url1 and manual_plot_url2 %}
+        <h3>Visualizations for Manual Input Data</h3>
+        <img src="{{ manual_plot_url1 }}" alt="Average Purchase History (Manual)">
+        <img src="{{ manual_plot_url2 }}" alt="Average Purchase Value (Manual)">
+    {% endif %}
+
+    {% if recommendation %}
+    <div class="recommendation-section">
+        <h3>Personalized Recommendations:</h3>
+        <ul class="recommendation-list">
+            {% for item in recommendation %}
+                <li>{{ item.strip() }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <p>No recommendation available.</p>
+    {% endif %}
+
+</body>
+</html>
