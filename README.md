@@ -18,6 +18,24 @@ Ensure you have the following installed on your machine:
 - `pip` (Python package installer)
 - `virtualenv` (If you don't have it installed, follow the instructions in the Installation section)
 
+### Environment Veriable
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file:
+
+```bash
+MY_SECRET="<YOUR_SECRET_KEY>"
+DB_HOST=127.0.0.1
+DB_USER="<YOUR_DATABASE_USERNAME>"
+DB_PASSWORD="<YOUR_DATABASE_PASSWORD>"
+DB_DATABASE="CLV"
+CLOUD_NAME="<YOUR_CLOUD_NAME>"
+CLOUD_API_KEY="<YOUR_CLOUD_API_KEY>"
+CLOUD_API_SECRET="<YOUR_CLOUD_API_SECRET>"
+
+
+
 ### Installation
 
 1. **Clone the Repository and Set Up the Virtual Environment:**
