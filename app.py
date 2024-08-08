@@ -19,6 +19,10 @@ from blueprints.users.users import user_bp
 import matplotlib
 from prediction_methodes import model, generate_recommendation,generation_model,generate_visualizations,generation_config,categorize_customer,handle_manual_requirements,handle_file_requirements
 import generate_report
+# cloudinary Import
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 # ALL Intilization Here 
@@ -34,6 +38,16 @@ app.secret_key= os.urandom(24)
 app.permanent_session_lifetime = timedelta(minutes=10)
 conn = mysql.connector.connect(host=os.getenv("DB_HOST"), user=os.getenv("DB_USER"),password=os.getenv("DB_PASSWORD"),database=os.getenv("DB_DETABASE"))
 cursor = conn.cursor()
+
+
+# Cloudinary Config
+
+cloudinary.config(
+    cloud_name='dovxt5sgb',
+    api_key='589945684199847',
+    api_secret='pxBWpTT4cf1qQskDokcZF3MoLVQ'
+)
+
 
 
 
@@ -194,9 +208,10 @@ def signup_page():
                         salt_length=8
                     )
         phone = int(request.form.get("phone"))
+        img = "https://static.vecteezy.com/system/resources/previews/001/840/612/large_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
         # Here Query Of Insertion Take Place
-        query = """INSERT INTO users (name, username, email, password, phone) VALUES (%s, %s, %s, %s, %s)"""
-        values = (name, username, email, password, phone)
+        query = """INSERT INTO users (name, username, email, password, phone, img) VALUES (%s, %s, %s, %s, %s, %s)"""
+        values = (name, username, email, password, phone,img)
         
         cursor.execute(query, values)
         conn.commit()
@@ -211,6 +226,43 @@ def signup_page():
 
         
     return render_template('users/signup.html')
+
+
+# EDIT IMAGES
+
+@app.route('/edit-image', methods=['POST'])
+def edit_image():
+    if 'newImage' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files['newImage']
+    
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    try:
+        # Upload the image to Cloudinary
+        upload_result = cloudinary.uploader.upload(file)
+        image_url = upload_result.get('url')
+        if "user_id" in session:
+            cursor.execute("""
+                UPDATE `users` 
+                SET `img` = %s 
+                WHERE `user_id` = %s
+            """, (image_url, session['user_id']))
+
+            # Commit the changes to the database
+            conn.commit()
+            print(image_url)
+        return jsonify({"image_url": image_url}), 200
+    
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"error": "Failed to upload image"}), 500
+
+
+
+
 
 @app.route("/teasting")
 def teasting():
