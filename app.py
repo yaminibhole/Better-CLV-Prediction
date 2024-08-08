@@ -43,9 +43,9 @@ cursor = conn.cursor()
 # Cloudinary Config
 
 cloudinary.config(
-    cloud_name='dovxt5sgb',
-    api_key='589945684199847',
-    api_secret='pxBWpTT4cf1qQskDokcZF3MoLVQ'
+    cloud_name=os.getenv("CLOUD_NAME"),
+    api_key=os.getenv("CLOUD_API_KEY"),
+    api_secret=os.getenv("CLOUD_API_SECREAT")
 )
 
 
