@@ -28,8 +28,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1e2832;
-    color: #ffffff;
+    background-color: #1e2832 !important;
+    color: #ffffff !important;
     overflow-x: hidden;
 }
 .section {
@@ -61,14 +61,14 @@ header {
 .btn-outline {
     padding-left: 30px;
     padding-right: 30px;
-    border: 1px solid #00ff9d;
-    color: #00ff9d;
+    border: 1px solid #00ff9d !important;
+    color: #00ff9d !important;
 }
 .btn-solid {
     padding-left: 42px;
     padding-right: 42px;
-    background-color: #00ff9d;
-    color: #1e2832;
+    background-color: #00ff9d !important;
+    color: #1e2832 !important;
 }
 .btn:hover {
     transform: scale(1.05);
@@ -86,13 +86,13 @@ header {
 }
 h1 {
     font-size: 3em;
-    color: #00ff9d;
+    color: #00ff9d !important;
     margin-bottom: 0;
     animation: fadeIn 1.5s ease-out;
 }
 p {
     font-size: 1.1em;
-    color: #cccccc;
+    color: #cccccc !important;
     animation: fadeIn 2s ease-out;
 }
 .image-content {
@@ -116,7 +116,7 @@ p {
 }
 .why-choose-us h2, .features-benefits h2, .about-us h2 {
     font-size: 2.5em;
-    color: #00ff9d;
+    color: #00ff9d !important;
     margin-bottom: 40px;
     position: relative;
 }
@@ -124,7 +124,7 @@ p {
     content: "";
     width: 100px;
     height: 4px;
-    background-color: #00ff9d;
+    background-color: #00ff9d !important;
     display: block;
     margin: 10px auto 0;
 }
@@ -137,7 +137,7 @@ p {
 .feature, .team-member {
     flex: 1 1 calc(33% - 20px);
     margin-bottom: 15px;
-    background-color: #1e2832;
+    background-color: #1e2832 !important;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -146,25 +146,25 @@ p {
 }
 .feature:hover, .team-member:hover {
     transform: scale(1.05);
-    background-color: #00ff9d;
-    color: #1e2832;
+    background-color: #00ff9d !important;
+    color: #1e2832 !important; 
 }
 .feature h3, .team-member h3 {
-    color: #00ff9d;
+    color: #00ff9d !important;
     margin-bottom: 10px;
 }
 .feature:hover h3, .team-member:hover h3 {
-    color: #1e2832;
+    color: #1e2832 !important;
 }
 .feature:hover p, .team-member:hover p {
-    color: #1e2832;
+    color: #1e2832 !important;
 }
 .contact {
     padding: 60px 20px;
 }
 .contact h2 {
     font-size: 2.5em;
-    color: #00ff9d;
+    color: #00ff9d !important;
     margin-bottom: 20px;
 }
 .contact form {
@@ -175,10 +175,10 @@ p {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #00ff9d;
+    border: 1px solid #00ff9d !important;
     border-radius: 5px;
-    background-color: #2c3942;
-    color: #ffffff;
+    background-color: #2c3942 !important;
+    color: #ffffff !important;
     transition: all 0.3s ease;
 }
 .contact input:focus, .contact textarea:focus {
@@ -188,19 +188,19 @@ p {
 .contact button {
     padding: 10px 20px;
     border-radius: 5px;
-    background-color: #00ff9d;
-    color: #1e2832;
+    background-color: #00ff9d !important;
+    color: #1e2832 !important;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 .contact button:hover {
-    background-color: #00cc7f;
+    background-color: #00cc7f !important;
     transform: scale(1.05);
 }
 
 .contact-form {
-    background-color: #1e293b;
+    background-color: #1e293b !important;
     padding: 40px;
     border-radius: 8px;
     width: 100%;
@@ -208,7 +208,7 @@ p {
     opacity: 0;
 }
 .contact-form h1 {
-    color: #4ade80;
+    color: #4ade80 !important;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -216,7 +216,7 @@ p {
     text-align: center;
     font-size: 14px;
     margin-bottom: 20px;
-    color: #cbd5e1;
+    color: #cbd5e1 !important;
 }
 .contact-form form {
     display: flex;

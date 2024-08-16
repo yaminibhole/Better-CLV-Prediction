@@ -64,9 +64,7 @@ def internal_error(error):
 def upload_and_predict():
     if request.method == 'POST':
         file = request.files.get('file')
-        # print(file)
         particular_id = request.form.get('particular_id')
-        # print(particular_id)
         use_manual_input = request.form.get('use_manual_input') == 'true'
         if use_manual_input:
             try:
@@ -189,7 +187,7 @@ def login_page():
                 flash("Kindly Check Your Password", 'error')
                 return render_template("index.html")
         else:
-           flash("Kindly Login First")
+           flash("Kindly Login First",'error')
         
     return render_template("users/login.html")
 
@@ -253,11 +251,9 @@ def edit_image():
 
             # Commit the changes to the database
             conn.commit()
-            print(image_url)
         return jsonify({"image_url": image_url}), 200
     
     except Exception as e:
-        print(f"An error occurred: {e}")
         return jsonify({"error": "Failed to upload image"}), 500
 
 
@@ -298,6 +294,9 @@ def dashbord_page():
     if 'user_id' in session:
         cursor.execute("""SELECT * FROM `users` WHERE `user_id` LIKE '{}'""".format(session['user_id']))
         myuser = cursor.fetchall()
+        if "customer_profile" not in session:
+            flash(f"You don't please fill the form first !", "error")
+            return redirect('/home')
 
         customer_profile = session.get('customer_profile')
         prediction = session.get('prediction')

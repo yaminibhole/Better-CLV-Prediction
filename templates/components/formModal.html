@@ -166,7 +166,7 @@ flex-direction: column;
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="scrollableModalLabel">Scrollable Modal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" id="modal_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="manualForm" action="/teasting-dash" method="POST" enctype="multipart/form-data">
@@ -255,6 +255,11 @@ flex-direction: column;
 </div>
 
 <script>
+    document.getElementById('modal_close').addEventListener('click', function() {
+    var myModal = new bootstrap.Modal(document.getElementById('scrollableModal'));
+    myModal.hide();
+});
+
     document.getElementById('footerSubmitButton').addEventListener('click', function() {
     // Create a new 'submit' event
     const event = new Event('submit', { cancelable: true });
@@ -275,7 +280,6 @@ document.getElementById('manualForm').addEventListener('submit', function(event)
 
     // Check if all required manual fields are filled
     let l = 2;
-    console.log("Chin Tapak Dam Dam");
     manualInputs.forEach(function(input) {
         if (input.value.trim() === '' && l <= 0) {
             useManualInput = false;

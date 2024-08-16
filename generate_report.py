@@ -76,10 +76,10 @@ def generate_report(customer_data,prediction,recommendation_list):
         <h2>Visualizations:</h2>
         <div class="visualization-section">
             <h3>Plot 1: Average Purchase History per Customer</h3>
-            <img src="C:\Users\asusb\Music\final\final\static\average_purchase_history.png" alt="Average Purchase History per Customer">
+            <img src="C:\Users\asusb\OneDrive\Desktop\NPM PROgram\1.-Better-Customer-Lifetime-Value-CLV-Prediction\static\average_purchase_history.png" alt="Average Purchase History per Customer">
 
-            <h3>Plot 2: Average Purchase Value per Customer</h3>
-            <img src="C:\Users\asusb\Music\final\final\static\average_purchase_value.png" alt="Average Purchase Value per Customer">
+            <h3>Plot 2: Credit utilization distribution</h3>
+            <img src="C:\Users\asusb\OneDrive\Desktop\NPM PROgram\1.-Better-Customer-Lifetime-Value-CLV-Prediction\static\credit_utilization_distribution.png">
 
         </div>
 
