@@ -17,8 +17,10 @@ secret_key = secrets.token_hex(16)
 
 
 # Configure pdfkit to use wkhtmltopdf
-path_wkhtmltopdf = r"wkhtmltox\bin\wkhtmltopdf.exe"  # Use raw string
+path_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+
+
 
 
 
@@ -74,7 +76,7 @@ def generate_report(customer_data,prediction,recommendation_list):
         </head>
         <body>
             <h1>Customer Report</h1>
-            <h2>Customer ID: {{{{ customer_data.ID if customer_data.ID else \'manual data\' }}}}</h2>
+            <h2>Customer Account No.: {{{{ customer_data.ID if customer_data.ID else \'manual data\' }}}}</h2>
             <table>
                 <tr><th>Field</th><th>Value</th></tr>
                 {{ '{{% for key, value in customer_data.items() if key not in [\'ID\', \'prediction\', \'CLV\', \'recommendation\'] %}}' }}

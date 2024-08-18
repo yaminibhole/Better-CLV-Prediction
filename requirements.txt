@@ -9,7 +9,7 @@ cachetools==5.4.0
 certifi==2024.7.4
 charset-normalizer==3.3.2
 click==8.1.7
-cloudinary==1.41.0
+cloudinary
 colorama==0.4.6
 contourpy==1.2.1
 cycler==0.12.1
@@ -50,7 +50,7 @@ matplotlib-inline==0.1.7
 mistune==3.0.2
 mysql==0.0.3
 mysql-connector-python==9.0.0
-mysqlclient==2.2.4
+mysqlclient
 nbclient==0.10.0
 nbconvert==7.16.4
 nbformat==5.10.4
@@ -75,9 +75,9 @@ pydantic_core==2.20.1
 Pygments==2.18.0
 pyparsing==3.1.2
 python-dateutil==2.9.0.post0
-python-dotenv==1.0.1
-pytz==2024.1
-pywin32==306
+python-dotenv
+pytz
+pywin32
 pyzmq==26.1.0
 referencing==0.35.1
 requests==2.32.3

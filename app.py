@@ -1,29 +1,32 @@
-from flask import Flask, render_template, request, flash,send_file, url_for, redirect,session,jsonify
-from flask_bootstrap import Bootstrap
-import sys
 import os
-
 import pickle
-import google.generativeai as genai
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-
-from werkzeug.security import generate_password_hash, check_password_hash
+import sys
+from datetime import timedelta
 # from forms import RegisterUser,LoginUser
 from functools import wraps
-from datetime import timedelta
-import mysql.connector
-from dotenv import load_dotenv
-from blueprints.users.users import user_bp
-import matplotlib
-from prediction_methodes import model, generate_recommendation,generation_model,generate_visualizations,generation_config,categorize_customer,handle_manual_requirements,handle_file_requirements
-import generate_report
+
 # cloudinary Import
 import cloudinary
-import cloudinary.uploader
 import cloudinary.api
+import cloudinary.uploader
+import google.generativeai as genai
+import matplotlib
+import matplotlib.pyplot as plt
+import mysql.connector
+import numpy as np
+import pandas as pd
+from dotenv import load_dotenv
+from flask import (Flask, flash, jsonify, redirect, render_template, request,
+                   send_file, session, url_for)
+from flask_bootstrap import Bootstrap
+from werkzeug.security import check_password_hash, generate_password_hash
 
+import generate_report
+from blueprints.users.users import user_bp
+from prediction_methodes import (categorize_customer, generate_recommendation,
+                                 generate_visualizations, generation_config,
+                                 generation_model, handle_file_requirements,
+                                 handle_manual_requirements, model)
 
 # ALL Intilization Here 
 load_dotenv()
