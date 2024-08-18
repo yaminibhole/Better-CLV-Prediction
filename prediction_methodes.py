@@ -66,23 +66,19 @@ def generate_recommendation(tier, customer_profile):
 
 # Generate Visulization
 
-
 # def generate_visualizations(data, is_manual=False):
 #     if not os.path.exists('static'):
 #         os.makedirs('static')
 
 #     data.loc[:, 'average_purchase_history'] = data['monthly_payment_burden'] * data['total_credit_utilized']
 
-#     data.loc[:, 'average_purchase_value'] = np.where(data['total_credit_limit'] == 0,0,data['paid_principal'] / (data['total_credit_limit'] + 1e-6))
-
-
 #     if 'ID' in data.columns:
 #         data.loc[:, 'ID'] = data['ID'].astype(str)
 
-#     # Plot 1: Average Purchase History per Customer
-#     plt.figure(figsize=(6,2))
-#     bar_width = 0.4  # Set the bar width here
-#     x = np.arange(len(data))  # X locations for the groups
+#     # Plot 1: Average Purchase History per Customer (Bar Chart)
+#     plt.figure(figsize=(7, 4))  # Consistent figure size for alignment
+#     bar_width = 0.4
+#     x = np.arange(len(data))
 #     plt.bar(x, data['average_purchase_history'], width=bar_width, color='lightgreen', edgecolor='k')
 #     plt.title('Average Purchase History per Customer')
 #     plt.xlabel('Customer ID' if not is_manual else 'Manual Input')
@@ -92,7 +88,6 @@ def generate_recommendation(tier, customer_profile):
 #     else:
 #         plt.xticks(x, range(1, len(data) + 1), rotation=90)
     
-#     # Set custom y-axis limits if needed
 #     y_min = data['average_purchase_history'].min() * 0.9
 #     y_max = data['average_purchase_history'].max() * 1.1
 #     plt.ylim(y_min, y_max)
@@ -102,25 +97,26 @@ def generate_recommendation(tier, customer_profile):
 #     plt.savefig(plot1_path)
 #     plt.close()
 
-#     # Plot 2: Average Purchase Value per Customer
-#     plt.figure(figsize=(6, 2))
-#     bar_width = 0.4  # Set the bar width here
-#     x = np.arange(len(data))  # X locations for the groups
-#     plt.bar(x, data['average_purchase_value'], width=bar_width, color='lightblue', edgecolor='k')
-#     plt.title('Average Purchase Value per Customer')
-#     plt.xlabel('Customer ID' if not is_manual else 'Manual Input')
-#     plt.ylabel('Average Purchase Value')
-#     if 'ID' in data.columns:
-#         plt.xticks(x, data['ID'], rotation=90)
-#     else:
-#         plt.xticks(x, range(1, len(data) + 1), rotation=90)
-
-#     # Set custom y-axis limits if needed
-#     y_min = data['average_purchase_value'].min() * 0.9
-#     y_max = data['average_purchase_value'].max() * 1.1
-#     plt.ylim(y_min, y_max)
+#     # Plot 2: Distribution of Credit Utilization and Payments (Pie Chart)
+#     plt.figure(figsize=(7, 4))  # Consistent figure size for alignment
+#     categories = ['Credit Utilized', 'Paid Principal', 'Credit Limit']  # Example categories
+#     values = [
+#         data['total_credit_utilized'].sum(),
+#         data['paid_principal'].sum(),
+#         data['total_credit_limit'].sum()
+#     ]
     
-#     plot2_path = 'static/average_purchase_value.png'
+#     def autopct_format(values):
+#         def my_format(pct):
+#             total = sum(values)
+#             val = int(round(pct * total / 100.0))
+#             return f'{pct:.1f}%\n({val:d})'
+#         return my_format
+    
+#     plt.pie(values, labels=categories, autopct=autopct_format(values), startangle=140, colors=['gold', 'lightcoral', 'lightskyblue'])
+#     plt.title('Distribution of Credit Utilization and Payments')
+    
+#     plot2_path = 'static/credit_utilization_distribution.png'
 #     plt.tight_layout()
 #     plt.savefig(plot2_path)
 #     plt.close()
@@ -128,46 +124,69 @@ def generate_recommendation(tier, customer_profile):
 #     return plot1_path, plot2_path
 
 
+
 def generate_visualizations(data, is_manual=False):
+    # Ensure 'static' directory exists for saving images
     if not os.path.exists('static'):
         os.makedirs('static')
 
-    data.loc[:, 'average_purchase_history'] = data['monthly_payment_burden'] * data['total_credit_utilized']
+    # Calculate 'average_purchase_history' based on 'monthly_payment_burden' and 'total_credit_utilized'
+    data['average_purchase_history'] = data['monthly_payment_burden'] * data['total_credit_utilized']
 
+    # Convert 'ID' column to string for consistent labeling, if it exists
     if 'ID' in data.columns:
-        data.loc[:, 'ID'] = data['ID'].astype(str)
+        data['ID'] = data['ID'].astype(str)
+
+    record = data.iloc[0]  # Assuming only one record for the new visualizations
+
+    ### Original Graphs
 
     # Plot 1: Average Purchase History per Customer (Bar Chart)
+
     plt.figure(figsize=(7, 4))  # Consistent figure size for alignment
     bar_width = 0.4
     x = np.arange(len(data))
-    plt.bar(x, data['average_purchase_history'], width=bar_width, color='lightgreen', edgecolor='k')
+
+    # Create the bar plot
+    bars = plt.bar(x, data['average_purchase_history'], width=bar_width, color='lightgreen', edgecolor='k')
     plt.title('Average Purchase History per Customer')
-    plt.xlabel('Customer ID' if not is_manual else 'Manual Input')
+    plt.xlabel('Customer Account Number' if not is_manual else 'Manual Input')
     plt.ylabel('Average Purchase History')
+
+    # Adjust x-ticks based on whether 'ID' column is present
     if 'ID' in data.columns:
         plt.xticks(x, data['ID'], rotation=90)
     else:
         plt.xticks(x, range(1, len(data) + 1), rotation=90)
-    
+
+    # Set y-axis limits to ensure proper display of bars
     y_min = data['average_purchase_history'].min() * 0.9
     y_max = data['average_purchase_history'].max() * 1.1
     plt.ylim(y_min, y_max)
-    
+
+    # Annotate each bar with its value
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width() / 2, height, f'{height:.2f}', 
+                ha='center', va='bottom')
+
+    # Save the plot
     plot1_path = 'static/average_purchase_history.png'
     plt.tight_layout()
     plt.savefig(plot1_path)
     plt.close()
 
+
     # Plot 2: Distribution of Credit Utilization and Payments (Pie Chart)
     plt.figure(figsize=(7, 4))  # Consistent figure size for alignment
-    categories = ['Credit Utilized', 'Paid Principal', 'Credit Limit']  # Example categories
+    categories = ['Credit Utilized', 'Paid Principal', 'Credit Limit']  # Categories for the pie chart
     values = [
         data['total_credit_utilized'].sum(),
         data['paid_principal'].sum(),
         data['total_credit_limit'].sum()
     ]
     
+    # Custom function to format the percentage display with actual values
     def autopct_format(values):
         def my_format(pct):
             total = sum(values)
@@ -175,16 +194,84 @@ def generate_visualizations(data, is_manual=False):
             return f'{pct:.1f}%\n({val:d})'
         return my_format
     
+    # Create the pie chart
     plt.pie(values, labels=categories, autopct=autopct_format(values), startangle=140, colors=['gold', 'lightcoral', 'lightskyblue'])
     plt.title('Distribution of Credit Utilization and Payments')
     
+    # Save the second plot
     plot2_path = 'static/credit_utilization_distribution.png'
     plt.tight_layout()
     plt.savefig(plot2_path)
     plt.close()
 
-    return plot1_path, plot2_path
+    ### New Graphs
 
+    # # Plot 3: Loan-to-Income Ratio and Debt-to-Income Ratio (Bar Chart)
+
+    # Create the bar chart
+    plt.figure(figsize=(7, 4))
+    ratios = ['Loan_Taken', 'Annual_Income']
+    values = [record['loan_to_income_ratio'] * record['annual_income'], record['annual_income']]
+
+    bars = plt.bar(ratios, values, color=['skyblue', 'lightgreen'], edgecolor='k')
+
+    # Annotate the values on the bars
+    for bar in bars:
+        yval = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width() / 2, yval, f'{yval:.2f}', ha='center', va='bottom')
+
+    # Set title and labels
+    plt.title('Loan-to-Income Ratio and Debt-to-Income Ratio')
+    plt.ylabel('Ratio')
+
+    # Save the plot
+    plot3_path = 'static/loan_debt_ratios.png'
+    plt.tight_layout()
+    plt.savefig(plot3_path)
+    plt.close()
+
+
+    # Plot 4: Credit Utilization Ratio (Gauge Chart)
+    plt.figure(figsize=(7, 4))
+    plt.subplot(1, 1, 1, projection='polar')
+    theta = np.linspace(0, 2 * np.pi, 100)
+    plt.fill_between(theta, 0, 1, color='lightgrey', alpha=0.5)
+    
+    theta_utilization = np.linspace(0, 2 * np.pi * record['credit_utilization_ratio'], 100)
+    plt.fill_between(theta_utilization, 0, 1, color='gold')
+    plt.title('Credit Utilization Ratio')
+    plot4_path = 'static/credit_utilization_gauge.png'
+    plt.tight_layout()
+    plt.savefig(plot4_path)
+    plt.close()
+
+    # Plot 6: Monthly Payment Burden (Column Chart)
+    plt.figure(figsize=(7, 4))
+    plt.bar(['Monthly Payment Burden'], [record['monthly_payment_burden']], color='lightblue', edgecolor='k')
+    plt.title('Monthly Payment Burden')
+    plt.ylabel('Burden as % of Income')
+    plot6_path = 'static/monthly_payment_burden.png'
+    plt.tight_layout()
+    plt.savefig(plot6_path)
+    plt.close()
+
+    # Plot 7: Proportion of Total Credit Utilized (Donut Chart)
+    plt.figure(figsize=(7, 4))
+    categories = ['Credit Utilized', 'Remaining Credit']
+    values = [record['total_credit_utilized'], record['total_credit_limit'] - record['total_credit_utilized']]
+    
+    plt.pie(values, labels=categories, autopct=autopct_format(values), startangle=140, colors=['gold', 'lightgrey'])
+    center_circle = plt.Circle((0,0), 0.70, fc='white')
+    fig = plt.gcf()
+    fig.gca().add_artist(center_circle)
+    plt.title('Proportion of Total Credit Utilized')
+    plot7_path = 'static/credit_utilization_donut.png'
+    plt.tight_layout()
+    plt.savefig(plot7_path)
+    plt.close()
+
+    # Return paths to all generated plots
+    return plot1_path, plot2_path, plot3_path, plot4_path, plot6_path, plot7_path
 
 # Handle Manual Form Requirements
 def handle_manual_requirements(manual_data,prediction):
@@ -202,10 +289,14 @@ def handle_manual_requirements(manual_data,prediction):
                     recommendation_list = recommendation.split('\n')  # Split recommendations by newline
                     
                     # Generate visualizations
-                    manual_plot_url1, manual_plot_url2 = generate_visualizations(manual_data, is_manual=True)
+                    plot1_path, plot2_path, plot3_path, plot4_path, plot6_path, plot7_path = generate_visualizations(manual_data, is_manual=True)
 
-                    session["plt1_path"]=manual_plot_url1
-                    session["plt2_path"]=manual_plot_url2
+                    session["plt1_path"]=plot1_path
+                    session["plt2_path"]=plot2_path
+                    session["plt3_path"]=plot3_path
+                    session["plt4_path"]=plot4_path
+                    session["plt6_path"]=plot6_path
+                    session["plt7_path"]=plot7_path
 
                     
                     # Convert manual data to HTML
@@ -217,7 +308,7 @@ def handle_manual_requirements(manual_data,prediction):
                     session['prediction'] = prediction[0].tolist()
                     session['recommendation'] = recommendation_list
 
-                    return manual_plot_url1,manual_plot_url2,manual_data_html,recommendation_list
+                    return plot1_path,plot2_path,manual_data_html,recommendation_list
 
 
 # Handle CLV
@@ -236,13 +327,23 @@ def handle_file_requirements(filtered_data,prediction):
                         recommendation_list = recommendation.split('\n')  # Split recommendations by newline
                         
                         # Generate visualizations
-                        plot_url1, plot_url2 = generate_visualizations(filtered_data)
+                        plot1_path, plot2_path, plot3_path, plot4_path, plot6_path, plot7_path = generate_visualizations(filtered_data)
+
+                        session["plt1_path"]=plot1_path
+                        session["plt2_path"]=plot2_path
+                        session["plt3_path"]=plot3_path
+                        session["plt4_path"]=plot4_path
+                        session["plt6_path"]=plot6_path
+                        session["plt7_path"]=plot7_path
 
                         # Convert data to JSON serializable format
                         customer_profile_serializable = {k: (v.tolist() if isinstance(v, np.ndarray) else v) for k, v in customer_profile.items()}
+
+
+
 
                         # Store data in session
                         session['customer_profile'] = customer_profile_serializable
                         session['prediction'] = prediction[0].tolist()
                         session['recommendation'] = recommendation_list
-                        return plot_url1,plot_url2,recommendation_list
+                        return plot1_path, plot2_path,recommendation_list

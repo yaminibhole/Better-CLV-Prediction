@@ -5,22 +5,60 @@
     body{
         background-color: #F0F0F0;
     }
+
+
+    .container {
+            margin-top: 20px;
+        }
+        .pred {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .prediction-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e9ecef;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1, h3 {
+            color: #343a40;
+        }
+        p {
+            font-size: 1rem;
+        }
+
 </style>
 
 
 
 
 <div class="container whole_container">
-    {%if 'ID' in customer_profile %}
-    <h1 class="text-dark ">Customer Profile ID: {{ customer_profile['ID'] }}</h1>
-    <h3>Prediction: {{ prediction }}</h3>
-    {% else %}
-    
-    <h1>Prediction: {{ prediction }}</h1>
+            {% if 'ID' in customer_profile %}
+            <h1 class="text-dark">Customer Account No. : {{ customer_profile['ID'] }}</h1>
+        {% endif %}
 
-    {%endif%}
-    
+        <div class="pred">
+            <h3 class="prediction-text">Prediction:</h3>
+            {% if prediction == 0 %}
+                <p>The customer will continue.</p>
+            {% else %}
+                <p>The customer will not continue.</p>
+            {% endif %}
+        </div>
 
+        <div class="info-box">
+            <p><strong>Customer Lifetime Value:</strong> {{ customer_profile['CLV'] }}</p>
+            <p><strong>Tier:</strong> {{ customer_profile['tier'] }}</p>
+        </div>
+        <br><br>
     <h2>Customer Profile</h2>
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
@@ -48,10 +86,17 @@
     <img src="{{ url_for('static', filename='average_purchase_history.png') }}" alt="Customer Lifetime Value Illustration" class="img-fluid">
     <br>
     <img src="{{ url_for('static', filename='credit_utilization_distribution.png') }}" alt="Customer Lifetime Value Illustration" class="img-fluid">
-    
-    </div>
-    <br><br>
+    <br>
+    <img src="{{ url_for('static', filename='balance_distribution.png') }}" alt="Customer Lifetime Value Illustration" class="img-fluid">
+    <br>
+    <img src="{{ url_for('static', filename='credit_utilization_donut.png') }}" alt="Customer Lifetime Value Illustration" class="img-fluid">
+    <br>
+    <img src="{{ url_for('static', filename='loan_debt_ratios.png') }}" alt="Customer Lifetime Value Illustration" class="img-fluid">
+    <br>
+    <img src="{{ url_for('static', filename='monthly_payment_burden.png') }}" alt="Customer Lifetime Value Illustration" class="img-fluid">
+    <br>
 
+        </div>
 
     <h2>Recommendations</h2>
     <div class="table-responsive">
@@ -78,6 +123,9 @@
             </tbody>
         </table>
     </div>
+
+
+
 
 
     <div class="report_gen">

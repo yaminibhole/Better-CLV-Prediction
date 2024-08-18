@@ -1,3 +1,9 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+
+
 <style>
     
 .clvform {
@@ -160,6 +166,10 @@ flex-direction: column;
     Add Data
 </button>
 
+{% include "Includes/flash.html" %}
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="scrollableModal" tabindex="-1" aria-labelledby="scrollableModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable custom-modal-width">
@@ -169,7 +179,7 @@ flex-direction: column;
                 <button type="button" id="modal_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="manualForm" action="/teasting-dash" method="POST" enctype="multipart/form-data">
+                <form id="manualForm" action="/predict" method="POST" enctype="multipart/form-data">
                     <div class="clvform">
                         <div class="upload-section">
                             <h2>Upload Data</h2>
@@ -182,67 +192,96 @@ flex-direction: column;
                         <div class="form-section">
                             <div class="or">OR</div>
                             <h2>Enter Data</h2>
-
+                        
                             <!-- Hidden field to indicate if manual input is used -->
                             <input type="hidden" id="use_manual_input" name="use_manual_input" value="false">
-
+                        
                             <div class="mb-3">
                                 <label for="paidLateFees" class="form-label">Paid Late Fees</label>
-                                <input type="text" id="paidLateFees" step="0.01" name="paid_late_fees" placeholder="Enter Paid Late Fees" class="form-control">
+                                <input type="text" id="paidLateFees" step="0.01" name="paid_late_fees" placeholder="Enter Paid Late Fees" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Paid Late Fees: Enter the total amount paid in late fees over the specified period.
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="debtToIncome" class="form-label">Debt to Income</label>
-                                <input type="text" id="debtToIncome" step="0.01" name="debt_to_income" placeholder="Enter Debt to Income" class="form-control">
+                                <input type="text" id="debtToIncome" step="0.01" name="debt_to_income" placeholder="Enter Debt to Income" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Debt to Income Ratio: 
+                                     Total Monthly Debt Payments (EMI) / Total Monthly Income *100
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="creditUtilizationRatio" class="form-label">Credit Utilization Ratio</label>
-                                <input type="text" id="creditUtilizationRatio" step="0.01" name="credit_utilization_ratio" placeholder="Enter Credit Utilization Ratio" class="form-control">
+                                <input type="text" id="creditUtilizationRatio" step="0.01" name="credit_utilization_ratio" placeholder="Enter Credit Utilization Ratio" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Credit Utilization Ratio:
+                                     Total Credit Card Balances / Total Credit Limits
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="annualIncome" class="form-label">Annual Income</label>
-                                <input type="text" id="annualIncome" step="0.01" name="annual_income" placeholder="Enter Annual Income" class="form-control">
+                                <input type="text" id="annualIncome" step="0.01" name="annual_income" placeholder="Enter Annual Income" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Annual Income: Enter your total income before taxes for the year.
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="averageAgeOfCredit" class="form-label">Average Age of Credit</label>
-                                <input type="text" id="averageAgeOfCredit" step="0.01" name="average_age_of_credit" placeholder="Enter Average Age of Credit" class="form-control">
+                                <input type="text" id="averageAgeOfCredit" step="0.01" name="average_age_of_credit" placeholder="Enter Average Age of Credit" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Average Age of Credit: 
+                                     Sum of Ages of All Credit Accounts / Number of Credit Accounts *100
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="loanToIncomeRatio" class="form-label">Loan to Income Ratio</label>
-                                <input type="text" id="loanToIncomeRatio" step="0.01" name="loan_to_income_ratio" placeholder="Enter Loan to Income Ratio" class="form-control">
+                                <input type="text" id="loanToIncomeRatio" step="0.01" name="loan_to_income_ratio" placeholder="Enter Loan to Income Ratio" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Loan to Income Ratio: 
+                                     Total Loan Payments / Total Income
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="employmentStability" class="form-label">Employment Stability</label>
-                                <input type="text" id="employmentStability" step="0.01" name="employment_stability" placeholder="Enter Employment Stability" class="form-control">
+                                <input type="text" id="employmentStability" step="0.01" name="employment_stability" placeholder="Enter Employment Stability" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Employment Stability: Rate your employment stability on a scale from 0 to 1, where 1 is the most stable.
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="creditInquiriesTrend" class="form-label">Credit Inquiries Trend</label>
-                                <input type="text" id="creditInquiriesTrend" step="0.01" name="credit_inquiries_trend" placeholder="Enter Credit Inquiries Trend" class="form-control">
+                                <input type="text" id="creditInquiriesTrend" step="0.01" name="credit_inquiries_trend" placeholder="Enter Credit Inquiries Trend" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Credit Inquiries Trend: Enter the number of credit inquiries made in the last year.
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="monthlyPaymentBurden" class="form-label">Monthly Payment Burden</label>
-                                <input type="text" id="monthlyPaymentBurden" step="0.01" name="monthly_payment_burden" placeholder="Enter Monthly Payment Burden" class="form-control">
+                                <input type="text" id="monthlyPaymentBurden" step="0.01" name="monthly_payment_burden" placeholder="Enter Monthly Payment Burden" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title=" Monthly Payment Burden=Installment/ Monthly Income.
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="paidPrincipal" class="form-label">Paid Principal</label>
-                                <input type="text" id="paidPrincipal" step="0.01" name="paid_principal" placeholder="Enter Paid Principal" class="form-control">
+                                <input type="text" id="paidPrincipal" step="0.01" name="paid_principal" placeholder="Enter Paid Principal" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Paid Principal: Enter the total amount of principal repaid on loans over the specified period.">
                             </div>
                             <div class="mb-3">
                                 <label for="paidInterest" class="form-label">Paid Interest</label>
-                                <input type="text" id="paidInterest" step="0.01" name="paid_interest" placeholder="Enter Paid Interest" class="form-control">
+                                <input type="text" id="paidInterest" step="0.01" name="paid_interest" placeholder="Enter Paid Interest" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Paid Interest: Enter the total amount of interest paid on loans over the specified period. ">
                             </div>
                             <div class="mb-3">
                                 <label for="totalCreditLimit" class="form-label">Total Credit Limit</label>
-                                <input type="text" id="totalCreditLimit" step="0.01" name="total_credit_limit" placeholder="Enter Total Credit Limit" class="form-control">
+                                <input type="text" id="totalCreditLimit" step="0.01" name="total_credit_limit" placeholder="Enter Total Credit Limit" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Total Credit Limit: Enter the sum of all your credit card limits:
+                                    ">
                             </div>
                             <div class="mb-3">
                                 <label for="totalCreditUtilized" class="form-label">Total Credit Utilized</label>
-                                <input type="text" id="totalCreditUtilized" step="0.01" name="total_credit_utilized" placeholder="Enter Total Credit Utilized" class="form-control">
+                                <input type="text" id="totalCreditUtilized" step="0.01" name="total_credit_utilized" placeholder="Enter Total Credit Utilized" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Total Credit Utilized: Enter the total amount of credit currently used across all credit cards:">
                             </div>
                             <div class="mb-3">
                                 <label for="balance" class="form-label">Balance</label>
-                                <input type="text" id="balance" step="0.01" name="balance" placeholder="Enter Balance" class="form-control">
+                                <input type="text" id="balance" step="0.01" name="balance" placeholder="Enter Balance" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Current Bank Account balance.">
                             </div>
                         </div>
+                        
                     </div>
                 </form>
             </div>
@@ -290,5 +329,14 @@ document.getElementById('manualForm').addEventListener('submit', function(event)
     // Update the hidden input field based on the check
     document.getElementById('use_manual_input').value = useManualInput ? 'true' : 'false';
 });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+
+
 
 </script>

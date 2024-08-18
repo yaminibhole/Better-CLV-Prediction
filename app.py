@@ -60,7 +60,7 @@ def not_found(error):
 def internal_error(error):
     return render_template('404.html'), 500
 
-@app.route('/teasting-dash', methods=['GET', 'POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def upload_and_predict():
     if request.method == 'POST':
         file = request.files.get('file')
@@ -100,19 +100,13 @@ def upload_and_predict():
                     'paid_principal', 'paid_interest', 'total_credit_limit', 'total_credit_utilized'
                 ])
                 manual_data['balance'] = balance
-                
+                print(f"-----------------The Predictio is : = {prediction}" )
                 manual_plot_url1,manual_plot_url2,manual_data_html,recommendation_list = handle_manual_requirements(manual_data=manual_data,prediction=prediction) 
 
                 return redirect("/dashbord")
-                # return render_template('ind.html', prediction=prediction[0], 
-                #                        manual_plot_url1=manual_plot_url1, 
-                #                        manual_plot_url2=manual_plot_url2, 
-                #                        CLV=manual_data['CLV'].iloc[0],
-                #                         manual_data_html=manual_data_html ,
-                #                        recommendation=recommendation_list)
-
             except ValueError as e:
-                return render_template('ind.html', error=str(e))
+                flash("Form Details Not fetch Properly","error")
+                return redirect("/home")
             
         elif file and particular_id:
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
@@ -124,7 +118,8 @@ def upload_and_predict():
                 filtered_data = df[df['ID'] == particular_id]
                 
                 if (filtered_data.empty):
-                    return render_template('ind.html', tables=[], id=particular_id, error="No data found for the given ID.")
+                    flash("No data found for the given ID","error")
+                    return redirect("/home")
                 else:
                     # Extract features for prediction from the filtered data
                     features = filtered_data[['paid_late_fees', 'debt_to_income', 'credit_utilization_ratio',
@@ -134,23 +129,18 @@ def upload_and_predict():
                     balance = filtered_data['balance'].values[0]
                     
                     prediction = model.predict(features)
-
+                    print(f"-----------------The Predictio is : = {prediction}" )
                     # Calculate CLV
                     
                     plot_url1,plot_url2,recommendation_list = handle_file_requirements(filtered_data=filtered_data,prediction=prediction)
                     return redirect("/dashbord")
-                    # return render_template('ind.html', 
-                    #                        tables=[filtered_data.to_html(classes='data', header="true")], 
-                    #                        id=particular_id, 
-                    #                        prediction=prediction[0], plot_url1=plot_url1, plot_url2=plot_url2, 
-                    #                        CLV=filtered_data['CLV'].iloc[0],
-                    #                        recommendation=recommendation_list)
             except ValueError:
-                return render_template('ind.html', tables=[], id=particular_id, error="Invalid ID format. Please enter a numeric ID.")
+                flash("Value Error Occoured","error")
+                return redirect("/home")
         else:
-            return render_template('ind.html', error="Please provide either manual input or upload a file with an ID.")
+            flash("The Parameter Is Not Found","error")
 
-    return render_template('ind.html')
+    return redirect("/home")
 
 @app.route("/generate_report")
 def gen_report():
@@ -184,10 +174,10 @@ def login_page():
                 session.permanent=True
                 return redirect('/home')
             else:
-                flash("Kindly Check Your Password", 'error')
+                flash("Kindly Check Your Password", 'danger')
                 return render_template("index.html")
         else:
-           flash("Kindly Login First",'error')
+           flash("Kindly Login First",'danger')
         
     return render_template("users/login.html")
 
@@ -219,6 +209,7 @@ def signup_page():
         myuser = cursor.fetchall()
         session['user_id'] = myuser[0][0]
         session.permanent=True
+        flash("Successfully Loggin Done","error")
         return redirect('/home')
  
 
@@ -251,6 +242,7 @@ def edit_image():
 
             # Commit the changes to the database
             conn.commit()
+            
         return jsonify({"image_url": image_url}), 200
     
     except Exception as e:
@@ -258,18 +250,6 @@ def edit_image():
 
 
 
-
-
-@app.route("/teasting")
-def teasting():
-    # print("hello World")
-    # print(session)
-    # if 'user_id' in session:
-    #     cursor.execute("""SELECT * FROM `users` WHERE `user_id` LIKE '{}'""".format(session['user_id']))
-    #     myuser = cursor.fetchall()
-    #     return render_template("form.html")
-    # return render_template("temp.html")
-    return render_template('clv_pages/home.html')
 
 @app.route("/home")
 def my_home():
@@ -295,7 +275,7 @@ def dashbord_page():
         cursor.execute("""SELECT * FROM `users` WHERE `user_id` LIKE '{}'""".format(session['user_id']))
         myuser = cursor.fetchall()
         if "customer_profile" not in session:
-            flash(f"You don't please fill the form first !", "error")
+            flash(f"please fill the form first !", "error")
             return redirect('/home')
 
         customer_profile = session.get('customer_profile')
@@ -316,17 +296,6 @@ def dashbord_page():
 
         return render_template("clv_pages/dashbord.html", user=myuser, customer_profile=customer_profile, prediction=prediction, recommendation=cleaned_recommendation)
     return render_template('index.html')
-
-# Home app 
-@app.route("/homeDevelopment")
-def dev():
-    return render_template('clv_pages/example[1].html')
-
-app.register_blueprint(user_bp)
-
-# @app.route("/helloworld")
-# def hello():
-#     return helloWOrld()
 
 #index Page
 @app.route("/")
