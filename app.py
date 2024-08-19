@@ -103,7 +103,7 @@ def upload_and_predict():
                     'paid_principal', 'paid_interest', 'total_credit_limit', 'total_credit_utilized'
                 ])
                 manual_data['balance'] = balance
-                manual_plot_url1,manual_plot_url2,manual_data_html,recommendation_list = handle_manual_requirements(manual_data=manual_data,prediction=prediction) 
+                plot1_path,plot2_path,manual_data_html,recommendation_list = handle_manual_requirements(manual_data=manual_data,prediction=prediction) 
 
                 return redirect("/dashbord")
             except ValueError as e:
@@ -133,7 +133,7 @@ def upload_and_predict():
                     prediction = model.predict(features)
                     # Calculate CLV
                     
-                    plot_url1,plot_url2,recommendation_list = handle_file_requirements(filtered_data=filtered_data,prediction=prediction)
+                    plot1_path,plot2_path,recommendation_list = handle_file_requirements(filtered_data=filtered_data,prediction=prediction)
                     return redirect("/dashbord")
             except ValueError:
                 flash("Value Error Occoured","error")
