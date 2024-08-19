@@ -306,7 +306,7 @@ def handle_manual_requirements(manual_data,prediction):
                     session['prediction'] = prediction[0].tolist()
                     session['recommendation'] = recommendation_list
 
-                    return plot1_path,plot2_path,plot3_path, plot4_path, plot6_path, plot7_path,manual_data_html,recommendation_list
+                    return plot1_path,plot2_path,manual_data_html,recommendation_list
 
 
 # Handle CLV
