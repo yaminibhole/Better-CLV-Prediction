@@ -103,7 +103,6 @@ def upload_and_predict():
                     'paid_principal', 'paid_interest', 'total_credit_limit', 'total_credit_utilized'
                 ])
                 manual_data['balance'] = balance
-                print(f"-----------------The Predictio is : = {prediction}" )
                 manual_plot_url1,manual_plot_url2,manual_data_html,recommendation_list = handle_manual_requirements(manual_data=manual_data,prediction=prediction) 
 
                 return redirect("/dashbord")
@@ -132,7 +131,6 @@ def upload_and_predict():
                     balance = filtered_data['balance'].values[0]
                     
                     prediction = model.predict(features)
-                    print(f"-----------------The Predictio is : = {prediction}" )
                     # Calculate CLV
                     
                     plot_url1,plot_url2,recommendation_list = handle_file_requirements(filtered_data=filtered_data,prediction=prediction)
