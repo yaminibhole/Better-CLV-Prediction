@@ -127,7 +127,7 @@ def generate_report(customer_data,prediction,recommendation_list):
         </html>
         """
 
-    print(customer_data.items())
+    
     template = Template(html_template)
     html_content = template.render(customer_data=customer_data,
                                    prediction=prediction,
