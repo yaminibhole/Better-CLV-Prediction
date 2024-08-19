@@ -1,15 +1,13 @@
 import os
 import pickle
 
-from dotenv import load_dotenv
 import google.generativeai as genai
-import matplotlib.pyplot as plt
 import matplotlib
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from flask import Flask, redirect, render_template, request, url_for,session
-
-
+from dotenv import load_dotenv
+from flask import Flask, redirect, render_template, request, session, url_for
 
 # Load the saved model
 
@@ -308,7 +306,7 @@ def handle_manual_requirements(manual_data,prediction):
                     session['prediction'] = prediction[0].tolist()
                     session['recommendation'] = recommendation_list
 
-                    return plot1_path,plot2_path,manual_data_html,recommendation_list
+                    return plot1_path,plot2_path,plot3_path, plot4_path, plot6_path, plot7_path,manual_data_html,recommendation_list
 
 
 # Handle CLV
