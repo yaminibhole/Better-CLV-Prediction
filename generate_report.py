@@ -17,7 +17,7 @@ secret_key = secrets.token_hex(16)
 
 
 # Configure pdfkit to use wkhtmltopdf
-path_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
+path_wkhtmltopdf = r"wkhtmltox\bin\wkhtmltopdf.exe"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
 

@@ -1,2 +1,4 @@
 # Pychar chache
 __pycache__/
+.env
+clv/
